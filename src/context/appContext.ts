@@ -6,7 +6,7 @@ export interface AppContext {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const defaultFunction = (action: string) => {};
+const defaultFunction = (_action: string) => {};
 
 const context : AppContext = {selectedAction: "", setSelectedAction: defaultFunction};
 
