@@ -12,16 +12,16 @@ const UpdateForm = () => {
       <Heading as="h2" size="lg">
         Get many employees
       </Heading>
-      <FormLabel>sort</FormLabel>
-      <Input type="text" />
-      <FormLabel>filters</FormLabel>
-      <Input type="text" />
-      <FormLabel>name</FormLabel>
-      <Input type="text" />
-      <FormLabel>position</FormLabel>
-      <Input type="text" />
-      <FormLabel>salary</FormLabel>
-      <Input type="number" />
+      <FormLabel htmlFor="sort" >Sort</FormLabel>
+      <Input id="sort" type="text" />
+      <FormLabel htmlFor="filters">Filters</FormLabel>
+      <Input id="filters" type="text" />
+      <FormLabel htmlFor="name">Name</FormLabel>
+      <Input id="name" type="text" />
+      <FormLabel htmlFor="position" >Position</FormLabel>
+      <Input id="position" type="text" />
+      <FormLabel htmlFor="salary" >Salary</FormLabel>
+      <Input id="salary" type="number" />
       <Button type="submit">Submit</Button>
     </FormControl>
   );

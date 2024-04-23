@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { Employee } from "../EmployeesList";
+import sendRequest from "../../utils/sendRequest";
 
 interface Props {
   setListToRender: (list: Employee[]) => void;
@@ -17,32 +18,17 @@ const AddForm = ({ setListToRender }: Props) => {
   const positionInput = useRef<HTMLInputElement>(null);
   const salaryInput = useRef<HTMLInputElement>(null);
 
-  const addData = async (e: object) => {
-    fetch("http://localhost:3000/api/v1/employees/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(e),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const list = data.data instanceof Array ? data.data : [];
-        setListToRender(list);
-      });
-  };
-
   return (
     <FormControl>
       <Heading as="h2" size="lg">
         Add employee
       </Heading>
-      <FormLabel>name</FormLabel>
-      <Input type="text" ref={nameInput} />
-      <FormLabel>position</FormLabel>
-      <Input type="text" ref={positionInput} />
-      <FormLabel>salary</FormLabel>
-      <Input type="number" ref={salaryInput} />
+      <FormLabel htmlFor="name">name</FormLabel>
+      <Input id="name" type="text" name="name" ref={nameInput} minLength={2} />
+      <FormLabel htmlFor="position">position</FormLabel>
+      <Input id="position" type="text" ref={positionInput} minLength={2} />
+      <FormLabel htmlFor="salary">salary</FormLabel>
+      <Input id="salary" type="number" min={1} ref={salaryInput} />
       <Button
         type="submit"
         onClick={() => {
@@ -51,7 +37,12 @@ const AddForm = ({ setListToRender }: Props) => {
             position: positionInput.current?.value || "",
             salary: +(salaryInput.current?.value || 0),
           };
-          addData(newEmployee);
+          sendRequest(
+            "Add",
+            setListToRender,
+            { "Content-Type": "application/json" },
+            JSON.stringify(newEmployee)
+          );
         }}
       >
         Submit

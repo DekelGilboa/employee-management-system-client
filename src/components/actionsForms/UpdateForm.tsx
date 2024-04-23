@@ -24,14 +24,14 @@ const UpdateForm = ({ setListToRender }: Props) => {
       <Heading as="h2" size="lg">
         Update employee
       </Heading>
-      <FormLabel>Employee ID</FormLabel>
-      <Input type="text" ref={employeeIdInput} />
-      <FormLabel>name</FormLabel>
-      <Input type="text" ref={nameInput} />
-      <FormLabel>position</FormLabel>
-      <Input type="text" ref={positionInput} />
-      <FormLabel>salary</FormLabel>
-      <Input type="number" ref={salaryInput} />
+      <FormLabel htmlFor="employee ID">Employee ID</FormLabel>
+      <Input type="text" id="employee ID" ref={employeeIdInput} />
+      <FormLabel htmlFor="name">name</FormLabel>
+      <Input type="text" id="name" ref={nameInput} />
+      <FormLabel htmlFor="position">position</FormLabel>
+      <Input type="text" id="position" ref={positionInput} />
+      <FormLabel htmlFor="salary">salary</FormLabel>
+      <Input type="number" id="salary" ref={salaryInput} />
       <Button
         type="submit"
         onClick={() => {

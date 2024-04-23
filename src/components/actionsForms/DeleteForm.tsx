@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { Employee } from "../EmployeesList";
+import sendRequest from "../../utils/sendRequest";
 
 interface Props {
   setListToRender: (list: Employee[]) => void;
@@ -14,26 +15,24 @@ interface Props {
 
 const DeleteForm = ({ setListToRender }: Props) => {
   const employeeIdInput = useRef<HTMLInputElement>(null);
-  const deleteData = async (id: string | undefined) => {
-    if (!id) return;
-    fetch("http://localhost:3000/api/v1/employees/" + id, { method: "DELETE" })
-      .then((response) => response.json())
-      .then((data) => {
-        const list = data.data instanceof Array ? data.data : [];
-        setListToRender(list);
-      });
-  };
   return (
     <FormControl>
       <Heading as="h2" size="lg">
         Delete single employee
       </Heading>
-      <FormLabel>{"Employee ID"}</FormLabel>
-      <Input type="text" ref={employeeIdInput} />
+      <FormLabel htmlFor="employee ID">{"Employee ID"}</FormLabel>
+      <Input id="employee ID" type="text" ref={employeeIdInput} />
       <Button
         type="submit"
         onClick={() => {
-          deleteData(employeeIdInput.current?.value);
+          // deleteData(employeeIdInput.current?.value);
+          sendRequest(
+            "Delete",
+            setListToRender,
+            undefined,
+            undefined,
+            employeeIdInput.current?.value
+          );
         }}
       >
         Submit
