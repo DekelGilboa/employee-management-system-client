@@ -8,22 +8,25 @@ interface Action {
 interface ActionsMap {
   [actionName: string]: Action;
 }
-interface Callback {
-  (array: Employee[]): void;
-}
+
 interface Options {
   method: string;
   headers?: HeadersInit;
   body?: string;
 }
+interface Props {
+  callback: (data: Employee[]) => void;
+  requestObject: RequestObject;
+}
+export interface RequestObject {
+  action: string;
+  id?: string;
+  headers?: HeadersInit;
+  body?: string;
+}
 
-const sendRequest = (
-  action: string,
-  setData: Callback,
-  headers?: HeadersInit,
-  body?: string,
-  id?: string
-) => {
+const sendRequest = ({requestObject, callback:setData}:Props) => {
+  const { action, body, headers, id } = requestObject;
   const baseUrl = "http://localhost:3000/api/v1/employees/";
   const actionsMap: ActionsMap = {
     "Get many": {
@@ -50,7 +53,7 @@ const sendRequest = (
   const method = actionsMap[action].method;
   const url = actionsMap[action].url;
   const options: Options = { method };
-  if (headers) options.headers = headers;
+  options.headers = headers || { "Content-Type": "application/json" };
   if (body) options.body = body;
 
   console.log("url: ", url);

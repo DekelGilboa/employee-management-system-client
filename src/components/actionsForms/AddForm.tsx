@@ -5,15 +5,14 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
-import { useRef } from "react";
-import { Employee } from "../EmployeesList";
-import sendRequest from "../../services/sendRequest";
+import { Dispatch, SetStateAction, useRef } from "react";
+import { RequestObject } from "../../services/sendRequest";
 
 interface Props {
-  setListToRender: (list: Employee[]) => void;
+  setRequestObject: Dispatch<SetStateAction<RequestObject>>;
 }
 
-const AddForm = ({ setListToRender }: Props) => {
+const AddForm = ({ setRequestObject }: Props) => {
   const nameInput = useRef<HTMLInputElement>(null);
   const positionInput = useRef<HTMLInputElement>(null);
   const salaryInput = useRef<HTMLInputElement>(null);
@@ -37,12 +36,10 @@ const AddForm = ({ setListToRender }: Props) => {
             position: positionInput.current?.value || "",
             salary: +(salaryInput.current?.value || 0),
           };
-          sendRequest(
-            "Add",
-            setListToRender,
-            { "Content-Type": "application/json" },
-            JSON.stringify(newEmployee)
-          );
+          setRequestObject({
+            action: "Add",
+            body: JSON.stringify(newEmployee),
+          });
         }}
       >
         Submit

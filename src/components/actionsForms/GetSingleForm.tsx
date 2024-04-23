@@ -5,15 +5,14 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
-import { useRef } from "react";
-import { Employee } from "../EmployeesList";
-import sendRequest from "../../services/sendRequest";
+import { Dispatch, SetStateAction, useRef } from "react";
+import { RequestObject } from "../../services/sendRequest";
 
 interface Props {
-  setListToRender: (list: Employee[]) => void;
+  setRequestObject: Dispatch<SetStateAction<RequestObject>>;
 }
 
-const GetSingleForm = ({ setListToRender }: Props) => {
+const GetSingleForm = ({ setRequestObject }: Props) => {
   const employeeIdInput = useRef<HTMLInputElement>(null);
 
   return (
@@ -26,13 +25,10 @@ const GetSingleForm = ({ setListToRender }: Props) => {
       <Button
         type="submit"
         onClick={() => {
-          sendRequest(
-            "Get Single",
-            setListToRender,
-            undefined,
-            undefined,
-            employeeIdInput.current?.value
-          );
+          setRequestObject({
+            action: "Get Single",
+            id: employeeIdInput.current?.value,
+          });
         }}
       >
         Submit

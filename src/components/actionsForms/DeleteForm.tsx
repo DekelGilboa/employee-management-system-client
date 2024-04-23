@@ -5,15 +5,14 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
-import { useRef } from "react";
-import { Employee } from "../EmployeesList";
-import sendRequest from "../../services/sendRequest";
+import { Dispatch, SetStateAction, useRef } from "react";
+import { RequestObject } from "../../services/sendRequest";
 
 interface Props {
-  setListToRender: (list: Employee[]) => void;
+  setRequestObject: Dispatch<SetStateAction<RequestObject>>;
 }
 
-const DeleteForm = ({ setListToRender }: Props) => {
+const DeleteForm = ({ setRequestObject }: Props) => {
   const employeeIdInput = useRef<HTMLInputElement>(null);
   return (
     <FormControl>
@@ -25,14 +24,10 @@ const DeleteForm = ({ setListToRender }: Props) => {
       <Button
         type="submit"
         onClick={() => {
-          // deleteData(employeeIdInput.current?.value);
-          sendRequest(
-            "Delete",
-            setListToRender,
-            undefined,
-            undefined,
-            employeeIdInput.current?.value
-          );
+          setRequestObject({
+            action: "Delete",
+            id: employeeIdInput.current?.value,
+          });
         }}
       >
         Submit

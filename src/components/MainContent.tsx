@@ -1,14 +1,8 @@
-import { useContext, useState } from "react";
-import appContext from "../context/appContext";
+import { useState } from "react";
 import EmployeesList, { Employee } from "./EmployeesList";
-import GetSingleForm from "./actionsForms/GetSingleForm";
-import DeleteForm from "./actionsForms/DeleteForm";
-import AddForm from "./actionsForms/AddForm";
-import UpdateForm from "./actionsForms/UpdateForm";
-import GetManyForm from "./actionsForms/GetManyForm";
+import FormsContainer from "./FormsContainer";
 
 const MainContent = () => {
-  const { selectedAction } = useContext(appContext);
   const [listToRender, setListToRender] = useState<Employee[]>([
     {
       name: "text",
@@ -19,13 +13,7 @@ const MainContent = () => {
   ]);
   return (
     <main>
-      <div style={{ maxWidth: "80%" }}>
-        {"Get Single" === selectedAction && <GetSingleForm setListToRender={setListToRender}/>}
-        {"Delete" === selectedAction && <DeleteForm setListToRender={setListToRender}/>}
-        {"Add" === selectedAction && <AddForm setListToRender={setListToRender}/>}
-        {"Get many" === selectedAction && <GetManyForm />}
-        {"Update" === selectedAction && <UpdateForm setListToRender={setListToRender} />}
-      </div>
+      <FormsContainer setListToRender={setListToRender}/>
       <EmployeesList employees={listToRender} />
     </main>
   );
