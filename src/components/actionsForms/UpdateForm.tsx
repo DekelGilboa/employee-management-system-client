@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { Employee } from "../EmployeesList";
 import { useRef } from "react";
-import sendRequest from "../../utils/sendRequest";
+import sendRequest from "../../services/sendRequest";
 
 interface Props {
   setListToRender: (list: Employee[]) => void;
