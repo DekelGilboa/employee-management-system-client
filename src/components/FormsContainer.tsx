@@ -13,9 +13,10 @@ interface Props {
 }
 
 const FormsContainer = ({ setListToRender }: Props) => {
+
   const { selectedAction } = useContext(appContext);
   const [requestObject, setRequestObject] = useState<RequestObject>({
-    action: "", id: ""
+    action: ""
   });
   useEffect(() => {
     sendRequest({ requestObject, callback: setListToRender });

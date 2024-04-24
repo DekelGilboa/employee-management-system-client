@@ -53,16 +53,16 @@ const sendRequest = ({ requestObject, callback: setData }: Props) => {
       url: baseUrl + id,
     },
   };
-  console.log("sendRequest called");
-  console.log(actionsMap, action);
+  // console.log("sendRequest called");
+  // console.log(actionsMap, action);
   const method = actionsMap[action].method;
   const url = actionsMap[action].url;
   const options: Options = { method };
   options.headers = headers || { "Content-Type": "application/json" };
   if (body) options.body = body;
 
-  console.log("url: ", url);
-  console.log("options: ", options);
+  // console.log("url: ", url);
+  // console.log("options: ", options);
   fetch(url, options)
     .then((response) => response.json())
     .then((data) => {

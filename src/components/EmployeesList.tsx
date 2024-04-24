@@ -21,7 +21,10 @@ interface Props {
 }
 
 const EmployeesList = ({ employees }: Props) => {
-  const list = employees || [];
+  const list = employees;
+  if (!list.length) {
+    return <p>No employees to show</p>;
+  }
   return (
     <TableContainer>
       <Table variant="simple">

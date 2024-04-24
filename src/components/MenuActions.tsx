@@ -16,7 +16,7 @@ import appContext from "../context/appContext";
 import { useContext } from "react";
 
 const MenuActions = () => {
-  const actions = ["Get many", "Get Single", "Add", "Update", "Delete"];
+  const actions = ["Get many", "Get single", "Add", "Update", "Delete"];
   const { selectedAction, setSelectedAction } = useContext(appContext);
 
   return (
