@@ -23,7 +23,7 @@ const MenuActions = () => {
     <>
       <Show below="lg">
         <Menu>
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+          <MenuButton m={1} as={Button} rightIcon={<ChevronDownIcon />}>
             {selectedAction}
           </MenuButton>
           <MenuList>
