@@ -23,15 +23,16 @@ export interface RequestObject {
   id?: string;
   headers?: HeadersInit;
   body?: string;
+  params?: string;
 }
 
-const sendRequest = ({requestObject, callback:setData}:Props) => {
-  const { action, body, headers, id } = requestObject;
+const sendRequest = ({ requestObject, callback: setData }: Props) => {
+  const { action, body, headers, id, params } = requestObject;
   const baseUrl = "http://localhost:3000/api/v1/employees/";
   const actionsMap: ActionsMap = {
     "Get many": {
       method: "GET",
-      url: baseUrl,
+      url: baseUrl + (params || ""),
     },
     "Get Single": {
       method: "GET",
