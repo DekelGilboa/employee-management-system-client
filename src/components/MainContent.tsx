@@ -4,14 +4,7 @@ import FormsContainer from "./FormsContainer";
 import { VStack } from "@chakra-ui/react";
 
 const MainContent = () => {
-  const [listToRender, setListToRender] = useState<Employee[]>([
-    {
-      name: "text",
-      _id: "1",
-      position: "Software Engineer",
-      salary: 60000,
-    },
-  ]);
+  const [listToRender, setListToRender] = useState<Employee[]>([]);
   return (
     <main>
       <VStack >

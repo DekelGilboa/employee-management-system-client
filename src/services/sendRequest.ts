@@ -28,13 +28,15 @@ export interface RequestObject {
 
 const sendRequest = ({ requestObject, callback: setData }: Props) => {
   const { action, body, headers, id, params } = requestObject;
+  if (!action) return;
   const baseUrl = "http://localhost:3000/api/v1/employees/";
+
   const actionsMap: ActionsMap = {
     "Get many": {
       method: "GET",
       url: baseUrl + (params || ""),
     },
-    "Get Single": {
+    "Get single": {
       method: "GET",
       url: baseUrl + id,
     },
@@ -51,6 +53,8 @@ const sendRequest = ({ requestObject, callback: setData }: Props) => {
       url: baseUrl + id,
     },
   };
+  console.log("sendRequest called");
+  console.log(actionsMap, action);
   const method = actionsMap[action].method;
   const url = actionsMap[action].url;
   const options: Options = { method };

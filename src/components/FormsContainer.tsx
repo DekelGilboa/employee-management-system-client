@@ -15,15 +15,15 @@ interface Props {
 const FormsContainer = ({ setListToRender }: Props) => {
   const { selectedAction } = useContext(appContext);
   const [requestObject, setRequestObject] = useState<RequestObject>({
-    action: "Get many",
+    action: "", id: ""
   });
   useEffect(() => {
     sendRequest({ requestObject, callback: setListToRender });
   }, [requestObject, setListToRender]);
-
+  
   return (
     <>
-      {"Get Single" === selectedAction && (
+      {"Get single" === selectedAction && (
         <GetSingleForm setRequestObject={setRequestObject} />
       )}
       {"Delete" === selectedAction && (

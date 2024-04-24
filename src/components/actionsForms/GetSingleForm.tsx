@@ -32,7 +32,7 @@ const GetSingleForm = ({ setRequestObject }: Props) => {
         type="submit"
         onClick={() => {
           setRequestObject({
-            action: "Get Single",
+            action: "Get single",
             id: employeeIdInput.current?.value,
           });
         }}
