@@ -11,7 +11,7 @@ const NavigationBar = () => {
       align={"center"}
       mb={2}
     >
-      <Stack direction={{ base: "column", md: "row" }}>
+      <Stack direction={{ base: "column", md: "row" }} alignItems={"center"}>
         <Logo />
         <ThemeSwitch />
       </Stack>

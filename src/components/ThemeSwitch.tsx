@@ -4,7 +4,7 @@ const ThemeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <HStack>
-      <Switch isChecked={colorMode === "dark"} onChange={toggleColorMode} />
+      <Switch name="switch color mode" isChecked={colorMode === "dark"} onChange={toggleColorMode} />
       <Text whiteSpace={"nowrap"}>Dark Mode</Text>
     </HStack>
   );
