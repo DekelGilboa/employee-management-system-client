@@ -61,7 +61,6 @@ const UpdateForm = ({ setRequestObject }: Props) => {
       <Input id="sort" type="text" />
       <FormLabel htmlFor="filters">Numeric Filter</FormLabel>
       <Stack
-        id="filters"
         direction={{ base: "column", sm: "row" }}
         align={"center"}
         spacing={3}
@@ -76,10 +75,10 @@ const UpdateForm = ({ setRequestObject }: Props) => {
             </option>
           ))}
         </Select>
-        <Input type="number" ref={filtersAmount} />
+        <Input type="number" id="filters" ref={filtersAmount} />
       </Stack>
       <FormLabel htmlFor="name">Name</FormLabel>
-      <Input id="name" type="text" ref={nameInput} />
+      <Input id="name" type="text" ref={nameInput} autoComplete="true"/>
       <FormLabel htmlFor="position">Position</FormLabel>
       <Input id="position" type="text" ref={positionInput} />
       <FormLabel htmlFor="salary">Salary</FormLabel>
