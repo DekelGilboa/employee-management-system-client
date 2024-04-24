@@ -14,8 +14,15 @@ interface Props {
 
 const UpdateForm = ({ setRequestObject }: Props) => {
   return (
-    <FormControl>
-      <Heading as="h2" size="lg">
+    <FormControl
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      w={"95%"}
+      maxW={"500px"}
+      gap={1}
+    >
+      <Heading as="h2" size="lg" mb={2}>
         Get many employees
       </Heading>
       <FormLabel htmlFor="sort">Sort</FormLabel>
@@ -27,7 +34,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
       <FormLabel htmlFor="position">Position</FormLabel>
       <Input id="position" type="text" />
       <FormLabel htmlFor="salary">Salary</FormLabel>
-      <Input id="salary" type="number" />
+      <Input id="salary" type="number" mb={2} />
       <Button
         type="submit"
         onClick={() => {

@@ -37,6 +37,9 @@ const MenuActions = () => {
       </Show>
       <Show above="lg">
         <Tabs
+          me={3}
+          p={2}
+          variant="soft-rounded"
           defaultIndex={actions.indexOf(selectedAction)}
           onChange={(index) => {
             setSelectedAction(actions[index]);

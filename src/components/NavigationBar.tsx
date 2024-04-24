@@ -9,10 +9,13 @@ const NavigationBar = () => {
       direction={{ base: "column", md: "row" }}
       justifyContent={"space-between"}
       align={"center"}
+      mb={2}
     >
-      <Logo />
+      <Stack direction={{ base: "column", md: "row" }}>
+        <Logo />
+        <ThemeSwitch />
+      </Stack>
       <MenuActions />
-      <ThemeSwitch />
     </Stack>
   );
 };

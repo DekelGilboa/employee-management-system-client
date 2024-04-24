@@ -18,8 +18,15 @@ const AddForm = ({ setRequestObject }: Props) => {
   const salaryInput = useRef<HTMLInputElement>(null);
 
   return (
-    <FormControl>
-      <Heading as="h2" size="lg">
+    <FormControl
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      w={"95%"}
+      maxW={"500px"}
+      gap={1}
+    >
+      <Heading as="h2" size="lg" mb={2}>
         Add employee
       </Heading>
       <FormLabel htmlFor="name">name</FormLabel>
@@ -27,7 +34,7 @@ const AddForm = ({ setRequestObject }: Props) => {
       <FormLabel htmlFor="position">position</FormLabel>
       <Input id="position" type="text" ref={positionInput} minLength={2} />
       <FormLabel htmlFor="salary">salary</FormLabel>
-      <Input id="salary" type="number" min={1} ref={salaryInput} />
+      <Input id="salary" type="number" min={1} ref={salaryInput} mb={2} />
       <Button
         type="submit"
         onClick={() => {
@@ -42,7 +49,7 @@ const AddForm = ({ setRequestObject }: Props) => {
           });
         }}
       >
-        Submit
+        Submit 
       </Button>
     </FormControl>
   );

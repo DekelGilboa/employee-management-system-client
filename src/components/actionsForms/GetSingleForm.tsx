@@ -16,12 +16,18 @@ const GetSingleForm = ({ setRequestObject }: Props) => {
   const employeeIdInput = useRef<HTMLInputElement>(null);
 
   return (
-    <FormControl>
-      <Heading as="h2" size="lg">
+    <FormControl
+    display={"flex"}
+    flexDirection={"column"}
+    alignItems={"center"}
+    w={"95%"}
+    maxW={"500px"}
+    gap={1}>
+      <Heading as="h2" size="lg" mb={2} >
         Get single employee
       </Heading>
       <FormLabel htmlFor="employee ID">{"Employee ID"}</FormLabel>
-      <Input type="text" id="employee ID" ref={employeeIdInput} />
+      <Input type="text" id="employee ID" ref={employeeIdInput} mb={2} />
       <Button
         type="submit"
         onClick={() => {

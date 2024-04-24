@@ -22,7 +22,7 @@ const FormsContainer = ({ setListToRender }: Props) => {
   }, [requestObject, setListToRender]);
 
   return (
-    <div style={{ maxWidth: "80%" }}>
+    <>
       {"Get Single" === selectedAction && (
         <GetSingleForm setRequestObject={setRequestObject} />
       )}
@@ -38,7 +38,7 @@ const FormsContainer = ({ setListToRender }: Props) => {
       {"Update" === selectedAction && (
         <UpdateForm setRequestObject={setRequestObject} />
       )}
-    </div>
+    </>
   );
 };
 

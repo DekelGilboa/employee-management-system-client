@@ -19,8 +19,15 @@ const UpdateForm = ({ setRequestObject }: Props) => {
   const salaryInput = useRef<HTMLInputElement>(null);
 
   return (
-    <FormControl>
-      <Heading as="h2" size="lg">
+    <FormControl
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      w={"95%"}
+      maxW={"500px"}
+      gap={1}
+    >
+      <Heading as="h2" size="lg" mb={2} >
         Update employee
       </Heading>
       <FormLabel htmlFor="employee ID">Employee ID</FormLabel>
@@ -30,7 +37,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
       <FormLabel htmlFor="position">position</FormLabel>
       <Input type="text" id="position" ref={positionInput} />
       <FormLabel htmlFor="salary">salary</FormLabel>
-      <Input type="number" id="salary" ref={salaryInput} />
+      <Input type="number" id="salary" ref={salaryInput} mb={2} />
       <Button
         type="submit"
         onClick={() => {
