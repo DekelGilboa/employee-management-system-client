@@ -26,7 +26,7 @@ const DeleteForm = ({ setRequestObject }: Props) => {
         Delete single employee
       </Heading>
       <FormLabel htmlFor="employee ID">{"Employee ID"}</FormLabel>
-      <Input id="employee ID" type="text" ref={employeeIdInput} mb={2}/>
+      <Input id="employee ID" type="text" ref={employeeIdInput} mb={2} minLength={5} required/>
       <Button
         type="submit"
         onClick={() => {

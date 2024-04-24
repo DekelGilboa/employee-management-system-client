@@ -31,13 +31,13 @@ const UpdateForm = ({ setRequestObject }: Props) => {
         Update employee
       </Heading>
       <FormLabel htmlFor="employee ID">Employee ID</FormLabel>
-      <Input type="text" id="employee ID" ref={employeeIdInput} />
+      <Input type="text" minLength={5} required id="employee ID" ref={employeeIdInput} />
       <FormLabel htmlFor="name">name</FormLabel>
-      <Input type="text" id="name" ref={nameInput} />
+      <Input type="text" minLength={2} id="name" ref={nameInput} />
       <FormLabel htmlFor="position">position</FormLabel>
-      <Input type="text" id="position" ref={positionInput} />
+      <Input type="text" id="position" minLength={2} ref={positionInput} />
       <FormLabel htmlFor="salary">salary</FormLabel>
-      <Input type="number" id="salary" ref={salaryInput} mb={2} />
+      <Input type="number" min={1} id="salary" ref={salaryInput} mb={2} />
       <Button
         type="submit"
         onClick={() => {

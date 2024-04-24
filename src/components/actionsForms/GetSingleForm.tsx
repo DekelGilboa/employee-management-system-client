@@ -27,7 +27,7 @@ const GetSingleForm = ({ setRequestObject }: Props) => {
         Get single employee
       </Heading>
       <FormLabel htmlFor="employee ID">{"Employee ID"}</FormLabel>
-      <Input type="text" id="employee ID" ref={employeeIdInput} mb={2} />
+      <Input type="text" id="employee ID" ref={employeeIdInput} mb={2} minLength={5} required/>
       <Button
         type="submit"
         onClick={() => {

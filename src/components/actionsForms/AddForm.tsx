@@ -30,11 +30,31 @@ const AddForm = ({ setRequestObject }: Props) => {
         Add employee
       </Heading>
       <FormLabel htmlFor="name">name</FormLabel>
-      <Input id="name" type="text" name="name" ref={nameInput} minLength={2} />
+      <Input
+        id="name"
+        type="text"
+        name="name"
+        ref={nameInput}
+        minLength={2}
+        required
+      />
       <FormLabel htmlFor="position">position</FormLabel>
-      <Input id="position" type="text" ref={positionInput} minLength={2} />
+      <Input
+        id="position"
+        type="text"
+        ref={positionInput}
+        minLength={2}
+        required
+      />
       <FormLabel htmlFor="salary">salary</FormLabel>
-      <Input id="salary" type="number" min={1} ref={salaryInput} mb={2} />
+      <Input
+        id="salary"
+        type="number"
+        min={1}
+        ref={salaryInput}
+        mb={2}
+        required
+      />
       <Button
         type="submit"
         onClick={() => {
@@ -49,7 +69,7 @@ const AddForm = ({ setRequestObject }: Props) => {
           });
         }}
       >
-        Submit 
+        Submit
       </Button>
     </FormControl>
   );
