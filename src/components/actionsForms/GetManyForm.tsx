@@ -43,6 +43,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
 
   const Option = styled.option`
     background: none !important;
+    margin-bottom: 4px;
   `;
 
   const buildParams = (
@@ -57,7 +58,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
       (name ? `name=${name}&` : "") +
       (position ? `position=${position}&` : "") +
       (salary ? `salary=${salary}&` : "") +
-      (filters ? `filters=${filters}` : "") +
+      (filters ? `filters=${filters}&` : "") +
       (sort ? `sort=${sort}` : "")
     );
   };
@@ -78,19 +79,21 @@ const UpdateForm = ({ setRequestObject }: Props) => {
         multiple
         ref={sortSelect}
         variant={"filled"}
-        minH={"150px"}
+        minH={"170px"}
         maxW={"80%"}
         onChange={(e) => {
           const selected = e.target?.selectedOptions;
-          if (selected.length < 2) return;
-          const lastSelected = selected[selected.length - 2];
+          // if (selected.length < 2) return;
+          // const lastSelected = selected[selected.length - 2];
           for (let i = 0; i < selected.length; i++) {
-            if (
-              selected[i].getAttribute("data-type") ===
-                lastSelected?.getAttribute("data-type") &&
-              selected[i] !== lastSelected
-            ) {
-              selected[i].selected = false;
+            selected[i].getAttribute("data-type");
+            for (let j = i + 1; j < selected.length; j++) {
+              if (
+                selected[i].getAttribute("data-type") ===
+                selected[j].getAttribute("data-type")
+              ) {
+                selected[i].selected = false;
+              }
             }
           }
         }}
@@ -122,14 +125,14 @@ const UpdateForm = ({ setRequestObject }: Props) => {
             </option>
           ))}
         </Select>
-        <Input type="number" id="filters" ref={filtersAmount} />
+        <Input type="number" min={1} id="filters" ref={filtersAmount} />
       </Stack>
       <FormLabel htmlFor="name">Name</FormLabel>
-      <Input id="name" type="text" ref={nameInput} autoComplete="true" />
+      <Input id="name" type="text" minLength={2} ref={nameInput} autoComplete="true" />
       <FormLabel htmlFor="position">Position</FormLabel>
-      <Input id="position" type="text" ref={positionInput} />
+      <Input id="position" type="text" minLength={2} ref={positionInput} />
       <FormLabel htmlFor="salary">Salary</FormLabel>
-      <Input id="salary" type="number" mb={2} ref={salaryInput} />
+      <Input id="salary" type="number" min={1} mb={2} ref={salaryInput} />
       <Button
         type="submit"
         onClick={() => {
