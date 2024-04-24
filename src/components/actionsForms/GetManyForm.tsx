@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { RequestObject } from "../../services/sendRequest";
 import { Dispatch, SetStateAction, useRef } from "react";
+import styled from "@emotion/styled";
 
 interface Props {
   setRequestObject: Dispatch<SetStateAction<RequestObject>>;
@@ -23,26 +24,41 @@ const UpdateForm = ({ setRequestObject }: Props) => {
     { value: "<=", label: "Less than or equal" },
     { value: "!=", label: "Different than" },
   ];
+  const sortOptions = [
+    // { value: "", label: "Choose sort", type: "default" },
+    { value: "name", label: "Name asc", type: "1" },
+    { value: "-name", label: "Name desc", type: "1" },
+    { value: "position", label: "Position asc", type: "2" },
+    { value: "-position", label: "Position desc", type: "2" },
+    { value: "salary", label: "Salary asc", type: "3" },
+    { value: "-salary", label: "Salary desc", type: "3" },
+  ];
 
-  // const sortInput = useRef<HTMLInputElement>(null);
+  const sortSelect = useRef<HTMLSelectElement>(null);
   const filtersOption = useRef<HTMLSelectElement>(null);
   const filtersAmount = useRef<HTMLInputElement>(null);
   const nameInput = useRef<HTMLInputElement>(null);
   const positionInput = useRef<HTMLInputElement>(null);
   const salaryInput = useRef<HTMLInputElement>(null);
 
+  const Option = styled.option`
+    background: none !important;
+  `;
+
   const buildParams = (
     name: string,
     position: string,
     salary: number,
-    filters: string
+    filters: string,
+    sort: string
   ) => {
     return (
       "?" +
       (name ? `name=${name}&` : "") +
       (position ? `position=${position}&` : "") +
       (salary ? `salary=${salary}&` : "") +
-      (filters ? `filters=${filters}` : "")
+      (filters ? `filters=${filters}` : "") +
+      (sort ? `sort=${sort}` : "")
     );
   };
   return (
@@ -58,7 +74,38 @@ const UpdateForm = ({ setRequestObject }: Props) => {
         Get many employees
       </Heading>
       <FormLabel htmlFor="sort">Sort</FormLabel>
-      <Input id="sort" type="text" />
+      <Select
+        multiple
+        ref={sortSelect}
+        variant={"filled"}
+        minH={"150px"}
+        maxW={"80%"}
+        onChange={(e) => {
+          const selected = e.target?.selectedOptions;
+          if (selected.length < 2) return;
+          const lastSelected = selected[selected.length - 2];
+          for (let i = 0; i < selected.length; i++) {
+            if (
+              selected[i].getAttribute("data-type") ===
+                lastSelected?.getAttribute("data-type") &&
+              selected[i] !== lastSelected
+            ) {
+              selected[i].selected = false;
+            }
+          }
+        }}
+      >
+        {sortOptions.map((option) => (
+          <Option
+            key={option.value}
+            value={option.value}
+            data-type={option.type}
+          >
+            {option.label}
+          </Option>
+        ))}
+      </Select>
+
       <FormLabel htmlFor="filters">Numeric Filter</FormLabel>
       <Stack
         direction={{ base: "column", sm: "row" }}
@@ -78,7 +125,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
         <Input type="number" id="filters" ref={filtersAmount} />
       </Stack>
       <FormLabel htmlFor="name">Name</FormLabel>
-      <Input id="name" type="text" ref={nameInput} autoComplete="true"/>
+      <Input id="name" type="text" ref={nameInput} autoComplete="true" />
       <FormLabel htmlFor="position">Position</FormLabel>
       <Input id="position" type="text" ref={positionInput} />
       <FormLabel htmlFor="salary">Salary</FormLabel>
@@ -100,7 +147,12 @@ const UpdateForm = ({ setRequestObject }: Props) => {
               filtersOption.current?.value +
               filtersAmount.current?.value;
           }
-          const params = buildParams(name, position, salary, filters);
+          const sort = Array.from(sortSelect.current?.selectedOptions || [])
+            .reduce((acc, option) => {
+              return acc + option.value + ",";
+            }, "")
+            .slice(0, -1);
+          const params = buildParams(name, position, salary, filters, sort);
           setRequestObject({ action: "Get many", params });
         }}
       >
