@@ -16,12 +16,18 @@ interface Props {
 const FormsContainer = ({ setListToRender }: Props) => {
   const { selectedAction } = useContext(appContext);
   const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
   const toast = useToast();
   const [requestObject, setRequestObject] = useState<RequestObject>({
     action: "",
   });
   useEffect(() => {
-    sendRequest({ requestObject, callback: setListToRender, setError });
+    sendRequest({
+      requestObject,
+      callback: setListToRender,
+      setError,
+      setSuccess,
+    });
   }, [requestObject, setListToRender]);
   useEffect(() => {
     if (error) {
@@ -34,7 +40,17 @@ const FormsContainer = ({ setListToRender }: Props) => {
       });
       setError("");
     }
-  }, [error, toast, requestObject]);
+    if (success) {
+      toast({
+        title: "Success",
+        description: success,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      setSuccess("");
+    }
+  }, [error, toast, requestObject, success]);
   return (
     <>
       {"Get single" === selectedAction && (

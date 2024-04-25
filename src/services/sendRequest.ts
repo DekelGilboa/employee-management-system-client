@@ -18,6 +18,7 @@ interface Props {
   callback: (data: Employee[]) => void;
   requestObject: RequestObject;
   setError?: (error: string) => void;
+  setSuccess?: (success: string) => void;
 }
 export interface RequestObject {
   action: string;
@@ -27,7 +28,12 @@ export interface RequestObject {
   params?: string;
 }
 
-const sendRequest = ({ requestObject, callback: setData, setError }: Props) => {
+const sendRequest = ({
+  requestObject,
+  callback: setData,
+  setError,
+  setSuccess,
+}: Props) => {
   const { action, body, headers, id, params } = requestObject;
   if (!action) return;
   const baseUrl = "http://localhost:3000/api/v1/employees/";
@@ -62,13 +68,19 @@ const sendRequest = ({ requestObject, callback: setData, setError }: Props) => {
   console.log(url, options);
   fetch(url, options)
     .then((response) => {
-      console.log("line 64", response);
-      return response.json()
+      return response.json();
     })
     .then((data) => {
       if (!(data.data instanceof Array))
-        return setError && setError(data.msg);
-      setData(data.data);
+        return setError && setError(data?.msg || "Error");
+      const success =
+        data?.msg && data?.data.length > 0
+          ? data.msg
+          : data?.data.length === 0
+          ? "There is no match"
+          : "Success";
+      setSuccess && setSuccess(success);
+      setData(data?.data || []);
     });
 };
 export default sendRequest;
