@@ -47,3 +47,14 @@ To run the project locally or contribute to it, follow these steps:
 - Vite
 - TypeScript
 - Chakra UI (for modern styling and components)
+
+## Example
+
+In the "Get many" tab, you can choose from several options to sort the results, filter by numeric filters, name, and position.
+
+![Untitled](https://github.com/DekelGilboa/employee-management-system-client/assets/105774551/1bf90fb6-2088-48ed-887c-f8258a162d92)
+
+You'll receive notifications and responses for all matching employees.
+
+![Untitled2](https://github.com/DekelGilboa/employee-management-system-client/assets/105774551/a43f6752-37ed-4ece-82bf-927d5eeb4ca0)
+
