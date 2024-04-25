@@ -84,6 +84,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
       <FormLabel htmlFor="sort">Sort</FormLabel>
       <Select
         multiple
+        icon={<></>}
         ref={sortSelect}
         variant={"filled"}
         minH={"170px"}
