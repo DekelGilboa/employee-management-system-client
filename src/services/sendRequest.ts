@@ -1,7 +1,8 @@
 import { Employee } from "../components/EmployeesList";
+import { GET, POST, PUT, DELETE, BASE_URL } from "../utils/constants";
 
 interface Action {
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: typeof GET | typeof POST | typeof PUT | typeof DELETE;
   url: string;
 }
 
@@ -36,28 +37,27 @@ const sendRequest = ({
 }: Props) => {
   const { action, body, headers, id, params } = requestObject;
   if (!action) return;
-  const baseUrl = "http://localhost:3000/api/v1/employees/";
 
   const actionsMap: ActionsMap = {
     "Get many": {
-      method: "GET",
-      url: baseUrl + (params || ""),
+      method: GET,
+      url: BASE_URL + (params || ""),
     },
     "Get single": {
-      method: "GET",
-      url: baseUrl + id,
+      method: GET,
+      url: BASE_URL + id,
     },
     Add: {
-      method: "POST",
-      url: baseUrl,
+      method: POST,
+      url: BASE_URL,
     },
     Update: {
-      method: "PUT",
-      url: baseUrl + id,
+      method: PUT,
+      url: BASE_URL + id,
     },
     Delete: {
-      method: "DELETE",
-      url: baseUrl + id,
+      method: DELETE,
+      url: BASE_URL + id,
     },
   };
   const method = actionsMap[action].method;

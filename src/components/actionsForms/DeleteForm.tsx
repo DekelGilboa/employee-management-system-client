@@ -13,7 +13,16 @@ interface Props {
 }
 
 const DeleteForm = ({ setRequestObject }: Props) => {
+  // Delete employee from the database when the submit button is clicked
+  const deleteEmployee = () => {
+    setRequestObject({
+      action: "Delete",
+      id: employeeIdInput.current?.value || "invalidID",
+    });
+  };
+  // Ref for the input field
   const employeeIdInput = useRef<HTMLInputElement>(null);
+
   return (
     <FormControl
       display={"flex"}
@@ -35,15 +44,7 @@ const DeleteForm = ({ setRequestObject }: Props) => {
         minLength={5}
         required
       />
-      <Button
-        type="submit"
-        onClick={() => {
-          setRequestObject({
-            action: "Delete",
-            id: employeeIdInput.current?.value || "invalidID",
-          });
-        }}
-      >
+      <Button type="submit" onClick={deleteEmployee}>
         Submit
       </Button>
     </FormControl>

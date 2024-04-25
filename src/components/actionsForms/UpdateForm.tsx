@@ -13,6 +13,27 @@ interface Props {
 }
 
 const UpdateForm = ({ setRequestObject }: Props) => {
+  const updateEmployee = () => {
+    const detailsToUpdate: {
+      name?: string;
+      position?: string;
+      salary?: number;
+    } = {};
+    if (nameInput.current?.value)
+      detailsToUpdate.name = nameInput.current?.value;
+    if (positionInput.current?.value)
+      detailsToUpdate.position = positionInput.current?.value;
+    if (salaryInput.current?.value)
+      detailsToUpdate.salary = +salaryInput.current?.value;
+    const idToUpdate: string = employeeIdInput.current?.value || "invalidID";
+    setRequestObject({
+      action: "Update",
+      id: idToUpdate,
+      body: JSON.stringify(detailsToUpdate),
+    });
+  };
+
+  // Refs for the input fields
   const employeeIdInput = useRef<HTMLInputElement>(null);
   const nameInput = useRef<HTMLInputElement>(null);
   const positionInput = useRef<HTMLInputElement>(null);
@@ -44,29 +65,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
       <Input type="text" id="position" minLength={2} ref={positionInput} />
       <FormLabel htmlFor="salary">salary</FormLabel>
       <Input type="number" min={1} id="salary" ref={salaryInput} mb={2} />
-      <Button
-        type="submit"
-        onClick={() => {
-          const detailsToUpdate: {
-            name?: string;
-            position?: string;
-            salary?: number;
-          } = {};
-          if (nameInput.current?.value)
-            detailsToUpdate.name = nameInput.current?.value;
-          if (positionInput.current?.value)
-            detailsToUpdate.position = positionInput.current?.value;
-          if (salaryInput.current?.value)
-            detailsToUpdate.salary = +salaryInput.current?.value;
-          const idToUpdate: string =
-            employeeIdInput.current?.value || "invalidID";
-          setRequestObject({
-            action: "Update",
-            id: idToUpdate,
-            body: JSON.stringify(detailsToUpdate),
-          });
-        }}
-      >
+      <Button type="submit" onClick={updateEmployee}>
         Submit
       </Button>
     </FormControl>

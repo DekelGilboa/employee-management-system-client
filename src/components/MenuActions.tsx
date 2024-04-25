@@ -14,9 +14,9 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import appContext from "../context/appContext";
 import { useContext } from "react";
+import { ACTIONS } from "../utils/constants";
 
 const MenuActions = () => {
-  const actions = ["Get many", "Get single", "Add", "Update", "Delete"];
   const { selectedAction, setSelectedAction } = useContext(appContext);
 
   return (
@@ -27,7 +27,7 @@ const MenuActions = () => {
             {selectedAction}
           </MenuButton>
           <MenuList>
-            {actions.map((action) => (
+            {ACTIONS.map((action) => (
               <MenuItem key={action} onClick={() => setSelectedAction(action)}>
                 {action}
               </MenuItem>
@@ -40,13 +40,13 @@ const MenuActions = () => {
           me={3}
           p={2}
           variant="soft-rounded"
-          defaultIndex={actions.indexOf(selectedAction)}
+          defaultIndex={ACTIONS.indexOf(selectedAction)}
           onChange={(index) => {
-            setSelectedAction(actions[index]);
+            setSelectedAction(ACTIONS[index]);
           }}
         >
           <TabList>
-            {actions.map((action) => (
+            {ACTIONS.map((action) => (
               <Tab key={action}>{action}</Tab>
             ))}
           </TabList>

@@ -13,6 +13,21 @@ interface Props {
 }
 
 const AddForm = ({ setRequestObject }: Props) => {
+
+  // Add employee to the database when the submit button is clicked
+  const addEmployee = () => {
+    const newEmployee = {
+      name: nameInput.current?.value || "",
+      position: positionInput.current?.value || "",
+      salary: +(salaryInput.current?.value || 0),
+    };
+    setRequestObject({
+      action: "Add",
+      body: JSON.stringify(newEmployee),
+    });
+  };
+
+  // Refs for the input fields
   const nameInput = useRef<HTMLInputElement>(null);
   const positionInput = useRef<HTMLInputElement>(null);
   const salaryInput = useRef<HTMLInputElement>(null);
@@ -55,20 +70,7 @@ const AddForm = ({ setRequestObject }: Props) => {
         mb={2}
         required
       />
-      <Button
-        type="submit"
-        onClick={() => {
-          const newEmployee = {
-            name: nameInput.current?.value || "",
-            position: positionInput.current?.value || "",
-            salary: +(salaryInput.current?.value || 0),
-          };
-          setRequestObject({
-            action: "Add",
-            body: JSON.stringify(newEmployee),
-          });
-        }}
-      >
+      <Button type="submit" onClick={addEmployee}>
         Submit
       </Button>
     </FormControl>

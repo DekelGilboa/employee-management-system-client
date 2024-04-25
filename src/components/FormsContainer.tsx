@@ -15,12 +15,16 @@ interface Props {
 
 const FormsContainer = ({ setListToRender }: Props) => {
   const { selectedAction } = useContext(appContext);
+
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
-  const toast = useToast();
   const [requestObject, setRequestObject] = useState<RequestObject>({
     action: "",
   });
+
+  const toast = useToast();
+
+// Send request to the server when the requestObject changes
   useEffect(() => {
     sendRequest({
       requestObject,
@@ -29,6 +33,8 @@ const FormsContainer = ({ setListToRender }: Props) => {
       setSuccess,
     });
   }, [requestObject, setListToRender]);
+
+  // Show toast messages if there is an error or success
   useEffect(() => {
     if (error) {
       toast({
