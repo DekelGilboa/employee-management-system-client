@@ -27,11 +27,17 @@ const UpdateForm = ({ setRequestObject }: Props) => {
       maxW={"500px"}
       gap={1}
     >
-      <Heading as="h2" size="lg" mb={2} >
+      <Heading as="h2" size="lg" mb={2}>
         Update employee
       </Heading>
       <FormLabel htmlFor="employee ID">Employee ID</FormLabel>
-      <Input type="text" minLength={5} required id="employee ID" ref={employeeIdInput} />
+      <Input
+        type="text"
+        minLength={5}
+        required
+        id="employee ID"
+        ref={employeeIdInput}
+      />
       <FormLabel htmlFor="name">name</FormLabel>
       <Input type="text" minLength={2} id="name" ref={nameInput} />
       <FormLabel htmlFor="position">position</FormLabel>
@@ -52,7 +58,8 @@ const UpdateForm = ({ setRequestObject }: Props) => {
             detailsToUpdate.position = positionInput.current?.value;
           if (salaryInput.current?.value)
             detailsToUpdate.salary = +salaryInput.current?.value;
-          const idToUpdate: string = employeeIdInput.current?.value || "";
+          const idToUpdate: string =
+            employeeIdInput.current?.value || "invalidID";
           setRequestObject({
             action: "Update",
             id: idToUpdate,

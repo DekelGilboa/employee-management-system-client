@@ -7,21 +7,34 @@ import AddForm from "./actionsForms/AddForm";
 import UpdateForm from "./actionsForms/UpdateForm";
 import GetManyForm from "./actionsForms/GetManyForm";
 import sendRequest, { RequestObject } from "../services/sendRequest";
+import { useToast } from "@chakra-ui/react";
 
 interface Props {
   setListToRender: (list: Employee[]) => void;
 }
 
 const FormsContainer = ({ setListToRender }: Props) => {
-
   const { selectedAction } = useContext(appContext);
+  const [error, setError] = useState<string>("");
+  const toast = useToast();
   const [requestObject, setRequestObject] = useState<RequestObject>({
-    action: ""
+    action: "",
   });
   useEffect(() => {
-    sendRequest({ requestObject, callback: setListToRender });
+    sendRequest({ requestObject, callback: setListToRender, setError });
   }, [requestObject, setListToRender]);
-  
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error",
+        description: error,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      setError("");
+    }
+  }, [error, toast, requestObject]);
   return (
     <>
       {"Get single" === selectedAction && (

@@ -17,6 +17,7 @@ interface Options {
 interface Props {
   callback: (data: Employee[]) => void;
   requestObject: RequestObject;
+  setError?: (error: string) => void;
 }
 export interface RequestObject {
   action: string;
@@ -26,7 +27,7 @@ export interface RequestObject {
   params?: string;
 }
 
-const sendRequest = ({ requestObject, callback: setData }: Props) => {
+const sendRequest = ({ requestObject, callback: setData, setError }: Props) => {
   const { action, body, headers, id, params } = requestObject;
   if (!action) return;
   const baseUrl = "http://localhost:3000/api/v1/employees/";
@@ -53,21 +54,21 @@ const sendRequest = ({ requestObject, callback: setData }: Props) => {
       url: baseUrl + id,
     },
   };
-  // console.log("sendRequest called");
-  // console.log(actionsMap, action);
   const method = actionsMap[action].method;
   const url = actionsMap[action].url;
   const options: Options = { method };
   options.headers = headers || { "Content-Type": "application/json" };
   if (body) options.body = body;
-
-  // console.log("url: ", url);
-  // console.log("options: ", options);
+  console.log(url, options);
   fetch(url, options)
-    .then((response) => response.json())
+    .then((response) => {
+      console.log("line 64", response);
+      return response.json()
+    })
     .then((data) => {
-      const list = data.data instanceof Array ? data.data : [];
-      setData(list);
+      if (!(data.data instanceof Array))
+        return setError && setError(data.msg);
+      setData(data.data);
     });
 };
 export default sendRequest;
