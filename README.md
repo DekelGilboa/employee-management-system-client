@@ -2,6 +2,12 @@
 
 ![image](https://github.com/DekelGilboa/employee-management-system-client/assets/105774551/cfb612fd-9228-4bde-8fca-4bfddefa3921)
 
+## Deployment
+
+The client interface for the Employees Management System is deployed on AWS S3 for production access. You can access the deployed application using the following link:
+
+[Employees Management System - Client Interface](http://ems.ts.s3-website.us-east-2.amazonaws.com/)
+
 This project is a client interface designed to interact with the API server for the Employees Management System. It allows users to perform various operations such as retrieving employees, sorting and filtering results, deleting and updating employees by ID, and adding new employees to the database.
 
 ## Features
