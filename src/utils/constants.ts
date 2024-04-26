@@ -12,7 +12,7 @@ const PUT = "PUT";
 
 const METHODS = [GET, POST, PUT, DELETE];
 
-const BASE_URL = "http://localhost:3000/api/v1/employees/";
+const BASE_URL = "http://ec2-3-141-153-254.us-east-2.compute.amazonaws.com:3000/api/v1/employees/";
 
 export {
   ACTIONS,
