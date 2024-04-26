@@ -87,7 +87,7 @@ const UpdateForm = ({ setRequestObject }: Props) => {
         icon={<></>}
         ref={sortSelect}
         variant={"filled"}
-        minH={"170px"}
+        minH={{base: "60px", md: "170px"}}
         maxW={"80%"}
         onChange={handleSelectSort}
       >
